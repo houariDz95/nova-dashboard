@@ -24,7 +24,7 @@ const Login = () => {
 
   return(
     <div className={darkMode ? "dark" : ""} style={{height: "100vh"}}>
-      <div className="h-full w-screen bg-main-bg dark:bg-main-dark-bg text-[#20232A] dark:text-white  ">
+      <div className="h-full w-screen bg-main-bg dark:bg-main-dark-bg dark:text-[#20232A] text-white  ">
       <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
         <div className="h-[80%] w-full flex items-center justify-center">
         <form className="w-[320px] h-[280px] p-4 flex flex-col dark:bg-main-bg bg-main-dark-bg items-center gap-8">
