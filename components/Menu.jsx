@@ -12,8 +12,8 @@ const Menu = ({setMenu}) => {
           <Link className="py-2" href="/results">
             <li className="cursor-pointer hover:text-cyan-500">Results</li>
           </Link>
-          <Link className="py-2" href="/">
-            <li className="cursor-pointer hover:text-cyan-500">components</li>
+          <Link className="py-2" href="/products">
+            <li className="cursor-pointer hover:text-cyan-500">Products</li>
           </Link>
         </ul>
     </div>

@@ -105,7 +105,7 @@ const SoldProducts = () => {
           <IoMdAdd size={25} />
         </button>
       </form>
-      <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-[450px] m-auto mt-[5px] p-5`}>
+      <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-full m-auto mt-[5px] p-5`}>
         {posts.map((item, i) => (
           <div key={item.name + i} className={`${flexCenter} border-b-1 border-gray-400 py-2`}>
             <span className="flex-1 md:text-md text-sm font-semibold">{item.name}</span>

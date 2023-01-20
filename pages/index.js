@@ -3,8 +3,9 @@ import Image from 'next/image'
 import  {useState} from 'react'
 import Navbar from '../components/Navbar';
 import SoldProduct from '../components/SoldProduct';
+import { useStateContext } from '../context/ContextProvider';
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false)
+  const {darkMode, setDarkMode} = useStateContext()
   return (
     <div className={darkMode ? "dark" : ""}>
       <Head>

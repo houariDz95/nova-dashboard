@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { flexCenter } from '../utils/styles';
 import {IoMdAdd} from 'react-icons/io';
 import {BsFillTrashFill} from "react-icons/bs";
-import {MdEdit} from "react-icons/md";
 import {db} from "../utils/firebase";
 import {collection, where, query,   onSnapshot, doc, deleteDoc} from 'firebase/firestore';
+import { useStateContext } from '../context/ContextProvider';
 
 const Results = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const {darkMode, setDarkMode} = useStateContext();
   const [start, setStart] = useState('01-17-2023');
   const [end, setEnd] = useState('01-19-2023');
   const [results, setResults] = useState([]);
@@ -36,7 +36,7 @@ const Results = () => {
       <div className="bg-main-bg dark:bg-main-dark-bg text-[#20232A] dark:text-white w-screen min-h-screen h-full">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <div>
-        <form className={`${flexCenter} md:w-[900px] sm:w-[650px] flex-col md:flex-row gap-5 w-screen md:gap-0 m-auto mt-10 p-5`}>
+        <form className={`${flexCenter} md:w-[900px] sm:w-[650px] w-full flex-col md:flex-row gap-5 w-screen md:gap-0 m-auto mt-10 p-5`}>
         <input 
         className="flex-1 mr-1 py-1 rounded-lg dark:bg-secondary-dark-bg focus:outline-none border-1 border-gray-300 text-sm px-1" 
         type="text" 
@@ -58,7 +58,7 @@ const Results = () => {
           <IoMdAdd size={25} />
         </button>
       </form>
-      <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-[450px] m-auto mt-[5px] p-5`}>
+      <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-full m-auto mt-[5px] p-5`}>
         {results.map((item, i) => (
           <div key={item.name + i} className={`${flexCenter} border-b-1 border-gray-400 py-2`}>
             <span className="flex-1 md:text-md text-sm font-semibold">{item.name}</span>

@@ -7,9 +7,10 @@ import {MdEdit} from "react-icons/md";
 import {IoIosAddCircle} from "react-icons/io"
 import {addDoc, collection, serverTimestamp, query, orderBy, onSnapshot, doc, deleteDoc, updateDoc} from 'firebase/firestore';
 import {flexCenter} from "../utils/styles";
+import { useStateContext } from '../context/ContextProvider';
 
 const Credit = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const {darkMode, setDarkMode} = useStateContext();
   const [credits, setCredits] = useState([]);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -69,7 +70,7 @@ const Credit = () => {
       <div className="dark:bg-main-dark-bg bg-main-bg dark:text-white text-[#20232A] min-h-screen h-full w-screen">
         <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
         <div>
-          <form className={`${flexCenter} md:w-[900px] sm:w-[650px] flex-col md:flex-row w-screen gap-2 m-auto mt-10 p-5`}>
+          <form className={`${flexCenter} md:w-[900px] sm:w-[650px] w-full flex-col md:flex-row gap-2 m-auto mt-10 p-5`}>
             <input className="flex-1 py-1  border-1 border-gray-300 focus:outline-none rounded-md text-md bg-transparent px-1" type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
             <input className="flex-1 py-1  border-1 border-gray-300 focus:outline-none rounded-md text-md bg-transparent px-1" type="number" placeholder="price" value={price} onChange={(e) => setPrice(e.target.value)} />
             <button 
@@ -79,7 +80,7 @@ const Credit = () => {
               <IoMdAdd size={25} />
           </button>
           </form>
-          <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-[450px] m-auto mt-[5px] p-5`}>
+          <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-full m-auto mt-[5px] p-5`}>
         {credits.map((item, i) => (
           <div key={item.name + i} className={`${flexCenter} border-b-1 border-gray-400 py-2`}>
             <span className="flex-1 text-md font-semibold">{item.name}</span>
@@ -96,7 +97,7 @@ const Credit = () => {
           </div>
         ))}
       </div>
-      <span className="fixed md:bottom-10 md:right-10 bottom-[75%] right-10 md:text-xl text-md font-bold bg-cyan-500 md:py-4 md:px-8 py-5 px-2 rounded-xl text-white">{sumWithInitial} DA</span>
+      <span className="fixed md:bottom-10 md:right-10 bottom-[78%] right-5 md:text-xl text-md font-bold bg-cyan-500 md:py-4 md:px-8 py-5 px-2 rounded-xl text-white">{sumWithInitial} DA</span>
         </div>
       </div>
     </div>
