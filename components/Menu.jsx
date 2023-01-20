@@ -7,13 +7,13 @@ const Menu = ({setMenu}) => {
       `}>
           <AiOutlineClose size={30} className="text-cyan-500 mt-10" onClick={() => setMenu(false)}/>
           <Link className="py-2" href="/credit"> 
-            <li className="cursor-pointer hover:text-cyan-500">Credit</li>
+            <li className="cursor-pointer hover:text-cyan-500 text-white">Credit</li>
           </Link>
           <Link className="py-2" href="/results">
-            <li className="cursor-pointer hover:text-cyan-500">Results</li>
+            <li className="cursor-pointer hover:text-cyan-500 text-white">Results</li>
           </Link>
           <Link className="py-2" href="/products">
-            <li className="cursor-pointer hover:text-cyan-500">Products</li>
+            <li className="cursor-pointer hover:text-cyan-500 text-white">Products</li>
           </Link>
         </ul>
     </div>

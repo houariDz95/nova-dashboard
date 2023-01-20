@@ -4,7 +4,7 @@ export default function handler(req, res){
   if(username === process.env.ADMINE_USERNAME && password === process.env.ADMINE_PASSWORD){
     console.log(process.env.USERNAME)
     res.setHeader("set-cookie", cookie.serialize("token", process.env.TOKEN, {
-      maxAge: 60 * 60,
+      maxAge: 60 * 60 * 24 * 7,
       sameSite: "strict",
       path: "/",
     }))
