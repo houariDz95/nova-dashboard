@@ -4,7 +4,7 @@ import {AiFillFacebook} from 'react-icons/ai';
 import {HiMenu} from "react-icons/hi"
 import {flexCenter} from '../utils/styles';
 import {useState} from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 import Menu from './Menu'
 
 const Navbar = ({setDarkMode, darkMode}) => {

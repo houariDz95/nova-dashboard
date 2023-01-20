@@ -4,7 +4,7 @@ import {IoMdAdd} from 'react-icons/io';
 import {db} from '../utils/firebase';
 import {BsFillTrashFill} from "react-icons/bs";
 import {MdEdit} from "react-icons/md";
-import {IoIosAddCircle} from "react-icons/Io"
+import {IoIosAddCircle} from "react-icons/io"
 import {addDoc, collection, serverTimestamp, query, orderBy, onSnapshot, doc, deleteDoc, updateDoc} from 'firebase/firestore';
 import {flexCenter} from "../utils/styles";
 
