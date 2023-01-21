@@ -90,14 +90,14 @@ const Credit = () => {
               <button onClick={() => handelDelete(item.id)} className="p-1 rounded-full cursor-pointer bg-red-500  text-white text-md "><BsFillTrashFill /></button>
             </div>
             {item.update && <div className={`${flexCenter}`}>
-                <input type="number" value={inc} onChange={(e) => setInc(e.target.value)} className="w-[50px] border-1 border-teal-500 focus:outline-none mx-1" />
-                <input type="number" value={dec} onChange={(e) => setDec(e.target.value)} className="w-[50px] border-1 border-red-500 focus:outline-none mx-1" />
+                <input type="number" value={inc} onChange={(e) => setInc(e.target.value)} className="w-[70px] border-1 border-teal-500 text-teal-500 focus:outline-none mx-1" />
+                <input type="number" value={dec} onChange={(e) => setDec(e.target.value)} className="w-[70px] border-1 border-red-500 text-red-500 focus:outline-none mx-1" />
                 <button type="button" className="bg-teal-500 p-1 rounded-full text-md text-white" onClick={() => update(item)}><IoIosAddCircle /></button>
               </div>}
           </div>
         ))}
       </div>
-      <span className="fixed md:bottom-10 md:right-10 bottom-[78%] right-5 md:text-xl text-md font-bold bg-cyan-500 md:py-4 md:px-8 py-5 px-2 rounded-xl text-white">{sumWithInitial} DA</span>
+      <span className="fixed md:bottom-10 md:right-10 bottom-[75%] right-10 md:text-xl text-md font-bold bg-cyan-500 md:py-4 md:px-8 py-5 px-2 rounded-xl text-white">{sumWithInitial} DA</span>
         </div>
       </div>
     </div>
