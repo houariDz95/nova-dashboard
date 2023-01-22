@@ -92,7 +92,7 @@ const Credit = () => {
             {item.update && <div className={`${flexCenter}`}>
                 <input type="number" value={inc} onChange={(e) => setInc(e.target.value)} className="w-[70px] border-1 border-teal-500 text-teal-500 focus:outline-none mx-1" />
                 <input type="number" value={dec} onChange={(e) => setDec(e.target.value)} className="w-[70px] border-1 border-red-500 text-red-500 focus:outline-none mx-1" />
-                <span className="p-1 rounded-full cursor-pointer bg-teal-500  text-white text-md" onClick={update}><IoIosAddCircle /></span>
+                <span className="p-1 rounded-full cursor-pointer bg-teal-500  text-white text-md" onClick={() => update(item)}><IoIosAddCircle /></span>
               </div>}
           </div>
         ))}
