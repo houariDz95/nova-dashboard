@@ -12,7 +12,7 @@ const Login = () => {
   const router = useRouter()
   const handelClick = async () => {
     try{
-     const res =await axios.post('http://localhost:3000/api/auth/login', {
+     const res =await axios.post('https://nova-dashboard.vercel.app/api/auth/login', {
         username,
         password
       })
