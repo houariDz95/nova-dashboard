@@ -14,7 +14,7 @@ const Model = ({results, setUpdate}) =>{
   const post = results.filter(item => item.id === id)
   const [name, setName] = useState(post[0]?.name)
   const [price, setPrice] = useState(post[0]?.price);
-  const [soldPrice, setSoldPrice] = useState(post[0].soldPrice)
+  const [soldPrice, setSoldPrice] = useState(post[0]?.soldPrice);
 
   const update = async () => {
     const docRef = doc(db, "posts", id)
