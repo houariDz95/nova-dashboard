@@ -77,31 +77,30 @@ const SoldProducts = () => {
 
   return (
     <div className="h-screen">
-      <form className={`${flexCenter} md:w-[900px] sm:w-[650px] flex-col md:flex-row gap-5 w-screen md:gap-0 m-auto mt-10 p-5`}>
+      <form className={`${flexCenter} md:w-[900px] sm:w-[650px] flex-col md:flex-row gap-5 w-screen md:gap-0 m-auto mt-10 p-5`} onSubmit={handelClick}>
         <input
           className="flex-1 mr-1 py-1 rounded-lg dark:bg-secondary-dark-bg focus:outline-none border-1 border-gray-300 text-sm px-1"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="name"
+          placeholder="اسم المنتج"
         />
         <input
           className="flex-1 mr-1 py-1 rounded-lg dark:bg-secondary-dark-bg focus:outline-none border-1 border-gray-300 text-sm px-1"
           type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          placeholder="price"
+          placeholder="سعرالمنتج"
         />
         <input
           className="flex-1 mr-1 py-1 rounded-lg dark:bg-secondary-dark-bg focus:outline-none border-1 border-gray-300 text-sm px-1"
           type="number"
           value={soldPrice}
           onChange={(e) => setSoldPrice(e.target.value)}
-          placeholder="sold price"
+          placeholder="سعر البيع "
         />
         <button
-          type="button"
-          onClick={handelClick}
+          type="submit"
           className="py-1 px-3 rounded-lg cursor-pointer bg-cyan-500 text-white font-semibold">
           <IoMdAdd size={25} />
         </button>
