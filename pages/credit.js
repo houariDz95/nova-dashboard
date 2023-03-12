@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import Navbar from '../components/Navbar';
+import Model from '../components/Model';
 import {IoMdAdd} from 'react-icons/io';
 import {db} from '../utils/firebase';
 import {BsFillTrashFill} from "react-icons/bs";
@@ -8,21 +9,17 @@ import {IoIosAddCircle} from "react-icons/io"
 import {addDoc, collection, serverTimestamp, query, orderBy, onSnapshot, doc, deleteDoc, updateDoc} from 'firebase/firestore';
 import {flexCenter} from "../utils/styles";
 import { useStateContext } from '../context/ContextProvider';
-
+import { useRouter } from 'next/router';
 const Credit = () => {
   const {darkMode, setDarkMode} = useStateContext();
   const [credits, setCredits] = useState([]);
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [inc, setInc] = useState('0');
-  const [dec, setDec] = useState(0);
-  const sumWithInitial = credits.reduce(
-    (previousValue, currentValue) => Number(previousValue) + Number(currentValue.price) ,
-    0
-  );
+  const [model, setModel] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     const getData = async() => {
-      const collectionRef = collection(db, "credit");
+      const collectionRef = collection(db, "person");
       const q = query(collectionRef, orderBy("timestamp", "desc"));
       const unsubscribe = onSnapshot(q, (snapshot) => {
         setCredits(snapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
@@ -31,75 +28,53 @@ const Credit = () => {
     }
     getData();
   }, [])
-  const handelDelete = async(id) =>{
-    const docRef = doc(db, "credit", id);
-     await deleteDoc(docRef);
-  }
-  const handelUpdate = async (item) => {
-    const docRef = doc(db, "credit", item.id);
-    await updateDoc(docRef, {
-      update: true,
-    })
-  }
-  const update = async (item) => {
-  
-   const docRef = doc(db, "credit", item.id);
-    await updateDoc(docRef, {
-      update: true,
-      price: Number(item.price) + Number(dec) - Number(inc),
-      update: false,
-    })
-    setInc(0)
-    setDec(0)
-  }
-  const handelClick = async (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const collectionRef = collection(db, "credit");
+    if (name === "") return;
+    setName("");
+    const collectionRef = collection(db, "person");
     await addDoc(collectionRef, {
       name: name,
-      price: price,
-      update: false,
+      tasks: [],
       timestamp: serverTimestamp(),
     })
     setName('');
-    setPrice('');
   }
-
+  const openModel = (id) => {
+    setModel(true)
+    router.push(`/credit?id=${id}`);
+  }
   return(
     <div className={darkMode ? 'dark' : ''}>
       <div className="dark:bg-main-dark-bg bg-main-bg dark:text-white text-[#20232A] min-h-screen h-full w-screen">
         <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
         <div>
-          <form className={`${flexCenter} md:w-[900px] sm:w-[650px] w-full flex-col md:flex-row gap-2 m-auto mt-10 p-5`}>
-            <input className="flex-1 py-1  border-1 border-gray-300 focus:outline-none rounded-md text-md bg-transparent px-1" type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
-            <input className="flex-1 py-1  border-1 border-gray-300 focus:outline-none rounded-md text-md bg-transparent px-1" type="number" placeholder="price" value={price} onChange={(e) => setPrice(e.target.value)} />
+          <form 
+          className={`${flexCenter} md:w-[900px] sm:w-[650px] w-full flex-col md:flex-row gap-2 m-auto mt-10 p-5`} 
+          onSubmit={handleSubmit}
+          >
+            <input className="flex-1 py-1  border-1 border-gray-300 focus:outline-none rounded-md text-md bg-transparent px-1" type="text" placeholder="أضف شخص.." value={name} onChange={(e) => setName(e.target.value)} />
             <button 
-            type="button" 
-            onClick={handelClick} 
+            type="submit"  
             className="py-1 px-3 rounded-lg cursor-pointer bg-cyan-500 text-white font-semibold">
               <IoMdAdd size={25} />
           </button>
           </form>
-          <div className={`flex flex-col md:w-[900px] sm:w-[650px] w-full m-auto mt-[5px] p-5`}>
-        {credits.map((item, i) => (
-          <div key={item.name + i} className={`${flexCenter} border-b-1 border-gray-400 py-2`}>
-            <span className="flex-1 text-md font-semibold">{item.name}</span>
-            <span className="flex-1 text-md font-semibold">{item.price} DA</span>
-            <div className={`${flexCenter}`}>
-              {!item.update && <button onClick={() => handelUpdate(item)} className="p-1 rounded-full cursor-pointer bg-teal-500 text-white text-md mr-2"><MdEdit /></button>}
-              <button onClick={() => handelDelete(item.id)} className="p-1 rounded-full cursor-pointer bg-red-500  text-white text-md "><BsFillTrashFill /></button>
-            </div>
-            {item.update && <div className={`${flexCenter}`}>
-                <input type="number" value={inc} onChange={(e) => setInc(e.target.value)} className="w-[70px] border-1 border-teal-500 text-teal-500 focus:outline-none mx-1" />
-                <input type="number" value={dec} onChange={(e) => setDec(e.target.value)} className="w-[70px] border-1 border-red-500 text-red-500 focus:outline-none mx-1" />
-                <span className="p-1 rounded-full cursor-pointer bg-teal-500  text-white text-md" onClick={() => update(item)}><IoIosAddCircle /></span>
-              </div>}
+          <div className={`${flexCenter} md:w-[900px] sm:w-[650px] w-full flex gap-5 m-auto mt-10 p-5 flex-wrap`}>
+            {credits.map(item => (
+              <div key={item.id} 
+              className="cursor-pointer w-40 h-40 shadow-md dark:shadow-xl dark:shadow-gray-900 hover:border-1 hover:border-cyan-500 hover:rounded-md rounded-sm flex flex-col justify-between items-center py-5"
+              onClick={() => openModel(item.id)}
+            >
+                <h1 className='text-xl font-bold text-gray-700 dark:text-white' >{item.name}</h1>
+                <h1 className='text-xl font-semibold text-teal-500'>{item.tasks.reduce((previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue.price) , 0)}DA</h1>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <span className="fixed md:bottom-10 md:right-10 bottom-[75%]  right-5 md:text-xl text-sm font-bold bg-cyan-500 md:py-4 md:px-8 py-5 px-2 rounded-xl text-white">{sumWithInitial} DA</span>
         </div>
       </div>
+      {model && <Model setMedel={setModel} credits={credits} />}
     </div>
   )
 }
